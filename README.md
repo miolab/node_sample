@@ -10,3 +10,11 @@ $ npm --version
 $ mongo --version
 MongoDB shell version v4.2.5
 ```
+
+---
+
+### sample_server_ejs/
+
+```
+$npm install ejs
+```
