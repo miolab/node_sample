@@ -11,32 +11,56 @@ MongoClient.connect(url, setting.connectOption, (err, client) => {
 
   const db = client.db(setting.db);
 
-  db.collection("users", (err, collection) => {
+  db.collection("users", async (err, collection) => {
     let docs = [
       { name: "im1", score: 90 },
       { name: "im2", score: 95 },
       { name: "im3", score: 88 },
     ];
 
-    // INSERT
-    // collection.insertMany(docs, (err, result) => {
-    //   console.dir(result);
-    // });
+    /* INSERT
+    collection.insertMany(docs, (err, result) => {
+      console.dir(result);
+    });
+    */
 
-    // SELECT
-    collection.find().toArray((err, items) => {
-      console.log("SELECT;\n", items);
+    /* UPDATE
+    collection.updateMany(
+      { name: "im1" },
+      { $set: { score: 120 } },
+      (err, result) => {
+        if (err) {
+          console.log("update err");
+        }
+        console.log("UPDATE;\n", result);
+      }
+    );
+    */
+
+    // DELETE
+    collection.deleteMany({ name: "im3" }, (err, result) => {
+      if (err) {
+        console.log("delete err");
+      }
+      console.log("DELETE;\n", result);
     });
 
-    // SELECT with stream
+    // SELECT
+    await collection.find().toArray((err, items) => {
+      console.log("SELECT;\n", items);
+      client.close();
+    });
+
+    /* SELECT with stream
     const stream = collection.find({ name: "im1" }).stream();
     stream.on("data", (items) => {
       console.log("SELECT with stream;\n", items);
     });
-    stream.on("end", async () => {
+    stream.on("end", () => {
       console.log("finished.");
-      await client.close();
+      client.close();
     });
+    */
   });
 });
 
