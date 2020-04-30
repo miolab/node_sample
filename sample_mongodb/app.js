@@ -33,9 +33,9 @@ MongoClient.connect(url, setting.connectOption, (err, client) => {
     stream.on("data", (items) => {
       console.log("SELECT with stream;\n", items);
     });
-    stream.on("end", () => {
+    stream.on("end", async () => {
       console.log("finished.");
-      client.close();
+      await client.close();
     });
   });
 });
