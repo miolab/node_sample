@@ -16,5 +16,15 @@ MongoDB shell version v4.2.5
 ### sample_server_ejs/
 
 ```
-$npm install ejs
+$ npm install ejs
+```
+
+---
+
+### sample_mongo/
+
+- use MongoClient
+
+```
+$ npm install mongodb
 ```
