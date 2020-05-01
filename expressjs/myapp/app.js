@@ -2,19 +2,29 @@ const express = require("express"),
   app = express(),
   port = 3000;
 
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
+
 // for Dev
 const logger = require("morgan");
+
+// for Dev; Logger
+app.use(logger("dev"));
 
 // File read (use middleware; file in public/)
 // e.g) http://localhost:3000/test2.txt
 app.use(express.static(__dirname + "/public"));
 
-// for Dev
-app.use(logger("dev"));
+// Custom middleware example
+app.use((req, res, next) => {
+  console.log("This is custom middleware.");
+  next();
+});
 
 // Front page
 app.get("/", (req, res) => {
-  res.send("Hello express, im.");
+  // res.send("Hello express, im.");
+  res.render("index", { title: "HOME ejs" });
 });
 
 // About page
