@@ -2,9 +2,15 @@ const express = require("express"),
   app = express(),
   port = 3000;
 
+// for Dev
+const logger = require("morgan");
+
 // File read (use middleware; file in public/)
 // e.g) http://localhost:3000/test2.txt
 app.use(express.static(__dirname + "/public"));
+
+// for Dev
+app.use(logger("dev"));
 
 // Front page
 app.get("/", (req, res) => {
