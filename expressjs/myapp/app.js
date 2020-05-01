@@ -21,15 +21,30 @@ app.use((req, res, next) => {
   next();
 });
 
-// Front page
-app.get("/", (req, res) => {
-  // res.send("Hello express, im.");
-  res.render("index", { title: "HOME ejs" });
+// Use params
+app.param("id", (req, res, next, id) => {
+  let users = ["im", "cat", "dog", "snake"];
+  req.params.name = users[id];
+  next();
+});
+app.get("/hello/:id", (req, res) => {
+  /* Usage example
+  http://localhost:3000/hello/0
+  (result: "Hello, im")
+  */
+  res.send("Hello, " + req.params.name);
+});
+app.get("/bye/:id", (req, res) => {
+  /* Usage example
+  http://localhost:3000/bye/2
+  (result: "Bye, dog")
+  */
+  res.send("Bye, " + req.params.name);
 });
 
-// About page
-app.get("/about", (req, res) => {
-  res.send("about hoge");
+// Front page (render)
+app.get("/", (req, res) => {
+  res.render("index", { title: "HOME ejs" });
 });
 
 // Users page
