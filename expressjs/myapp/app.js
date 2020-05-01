@@ -21,6 +21,11 @@ app.get("/users/:name?", (req, res) => {
   }
 });
 
+// Items page
+app.get("/items/:id([0-9]+)", (req, res) => {
+  res.send("Item number, " + req.params.id);
+});
+
 app.listen(port, () => {
   console.log("Server starting;", `http://localhost:${port}`);
 });
