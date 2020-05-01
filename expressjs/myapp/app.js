@@ -13,8 +13,12 @@ app.get("/about", (req, res) => {
 });
 
 // Users page
-app.get("/users/:name", (req, res) => {
-  res.send("Hello user, " + req.params.name);
+app.get("/users/:name?", (req, res) => {
+  if (req.params.name) {
+    res.send("Hello user, " + req.params.name);
+  } else {
+    res.send("Hello user, someone");
+  }
 });
 
 app.listen(port, () => {
