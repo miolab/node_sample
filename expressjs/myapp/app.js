@@ -1,12 +1,17 @@
 const express = require("express"),
   app = express(),
   port = 3000;
+const bodyParser = require("body-parser");
+
+// for Dev
+const logger = require("morgan");
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 
-// for Dev
-const logger = require("morgan");
+// Middleware:
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // for Dev; Logger
 app.use(logger("dev"));
@@ -19,6 +24,17 @@ app.use(express.static(__dirname + "/public"));
 app.use((req, res, next) => {
   console.log("This is custom middleware.");
   next();
+});
+
+// GET & POST
+app.get("/form", (req, res) => {
+  /* Usage example
+  http://localhost:3000/form
+  */
+  res.render("form");
+});
+app.post("/create", (req, res) => {
+  res.send(req.body.name);
 });
 
 // Use params
