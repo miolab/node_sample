@@ -6,6 +6,11 @@ const express = require("express"),
 const bodyParser = require("body-parser"),
   methodOverride = require("method-override");
 
+// CSRF
+const cookieParser = require("cookie-parser"),
+  expressSession = require("express-session"),
+  csrf = require("csurf");
+
 // for Dev
 const logger = require("morgan");
 
@@ -24,6 +29,15 @@ app.use(
     }
   })
 );
+
+// CSRF
+app.use(cookieParser());
+app.use(expressSession({ secret: ":;lkjhgfijojhhgjkhl;k" }));
+app.use(csrf());
+app.use((req, res, next) => {
+  res.locals.csrftoken = req.csrfToken();
+  next();
+});
 
 // for Dev; Logger
 app.use(logger("dev"));

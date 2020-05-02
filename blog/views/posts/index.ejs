@@ -7,6 +7,7 @@
         <a href="/posts/<%= i %>/edit">[編集]</a>
         <form action="/posts/<%= i %>" method="post">
           <input type="submit" value="削除">
+          <input type="hidden" name="_csrf" value="<%= csrftoken %>" />
           <input type="hidden" name="_method" value="delete">
           <input type="hidden" name="id" value="<%= i %>">
         </form>
