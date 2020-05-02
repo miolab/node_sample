@@ -1,0 +1,9 @@
+<%- include('../header'); -%>
+  <h1>新規作成</h1>
+  <form action="/posts/create" method='post'>
+    <input type="text" name="title">
+    <input type="text" name="body">
+    <input type="submit" value="投稿する">
+  </form>
+  <p><a href="/">もどる</a></p>
+<%- include('../footer'); -%>
