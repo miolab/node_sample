@@ -51,6 +51,11 @@ app.get("/posts/:id/edit", post.edit);
 app.put("/posts/:id", post.update);
 app.delete("/posts/:id/", post.destroy);
 
+// Error
+app.use((err, req, res, next) => {
+  res.send(err.message);
+});
+
 app.listen(port, () => {
   console.log("Server starting;", `http://localhost:${port}`);
 });
